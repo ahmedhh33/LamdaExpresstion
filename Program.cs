@@ -56,10 +56,23 @@ namespace LamdaExpression
 
             //Console.WriteLine(person1.Name);
 
-            //Person person2 = list.FirstOrDefault(x => x.Address == "sinaw");
+            Person person2 = list.FirstOrDefault(x => x.Address == "sinaw");
+            Console.WriteLine("Lasy Loading in C# ");
+            /* is a technique that delays the initialization of an object. This is a new feature of C# 4.0. 
+             ] The basic idea of lazy loading is to load objects
+             or data only when they are needed. A lazy loading pattern is also called Object on Demand. 
+             In other words, initialization of the object happens only on demand. 
+            */
+            IEnumerable<Person> person3 = list.Where(x => x.Address == "sinaw");
+            list.Add(new Person("Ahmed", 25, "Male", "sinaw"));
+            foreach(var item in person3)
+            {
+                Person person = item as Person;
+                Console.WriteLine(person.Name);
+            }
             //Console.WriteLine(person2?.Name??"this city is not here");
 
-
+            Console.WriteLine("######################################");
 
             /* Create a program that stores records of students in a list. 
              * Each student record should contain the following information:
@@ -77,17 +90,20 @@ namespace LamdaExpression
             new Students("Muqeet", 20, "Male", 3.8),
             new Students("Sehar", 18, "Female", 3.5)};
 
-            Console.WriteLine("Display the list of all students.");
+            Console.WriteLine("Task1: Display the list of all students.");
             PrintList(Studentlist);
-            Console.WriteLine("Filter and display male students with a GPA greater than 3.5.");
+            Console.WriteLine("######################################");
+            Console.WriteLine("Task2: Filter and display male students with a GPA greater than 3.5.");
             List<Students> list1 = Studentlist.Where(r=> r.GPA>3.5 && r.Gender == "Male").ToList();
             PrintList(list1);
-            Console.WriteLine("Find the average GPA of all female students.");
+            Console.WriteLine("######################################");
+            Console.WriteLine("Task3: Find the average GPA of all female students.");
             //List<Students> list2 = Studentlist.Where(t=>t.Gender=="Femal").OrderBy(r=>r.GPA).ToList();
             Double FemalGPAaverage = Studentlist.Where(t => t.Gender == "Female").Average(t=>t.GPA);
             Console.WriteLine($"The average of Female GPA: {FemalGPAaverage}");
+            Console.WriteLine("######################################");
 
-            Console.WriteLine("Display the names of the top three students with the highest GPA.");
+            Console.WriteLine("Task4: Display the names of the top three students with the highest GPA.");
             List<string> Top3Students = Studentlist.OrderByDescending(x => x.GPA).Take(3).Select(x => x.Name).ToList();
             foreach(string student in Top3Students)
             {
@@ -102,20 +118,21 @@ namespace LamdaExpression
 
             Console.WriteLine("New list after updating Aliya GPA from 3.2 to 3.5");
             PrintList(Studentlist);
+            Console.WriteLine("######################################");
 
-            Console.WriteLine("Remove a student from the list based on their name.");
+            Console.WriteLine("Task5: Remove a student from the list based on their name.");
 
             string removeStudent = "Sehar"; // To remove this name
             bool removed = Studentlist.Remove(Studentlist.Find(s => s.Name == removeStudent));
             if (removed)
             {
-                Console.WriteLine("Removed {0} from the list", removeStudent);
+                Console.WriteLine($"Removed {removeStudent} from the list");
                 Console.WriteLine("Updated list of students:");
                 PrintList(Studentlist);
             }
             else
             {
-                Console.WriteLine($"No student with the name {0} found", removeStudent);
+                Console.WriteLine($"No student with the name {removeStudent} found");
             }
         }
 
